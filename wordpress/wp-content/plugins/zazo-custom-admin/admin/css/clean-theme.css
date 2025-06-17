@@ -1,0 +1,231 @@
+/*
+ * Zazo Custom Admin - JS-Driven Clean Theme v2.2
+ */
+
+/* 1. Variáveis de Cor e Fonte */
+:root {
+    --font-family: 'Roboto', sans-serif;
+    --c-bg-page: #F8F9FA;
+    --c-bg-sidebar: #EAF0F6;
+    --c-bg-card: #FFFFFF;
+    --c-bg-button-primary: #2575FC;
+    --c-bg-button-primary-hover: #1A64D8;
+
+    --c-text-header: #2D3748;
+    --c-text-body: #4A5568;
+    --c-text-sidebar: #4A5568;
+    --c-text-sidebar-active: #FFFFFF;
+
+    --c-border: #E2E8F0;
+    --c-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+}
+
+/* 2. Ocultar a UI Padrão do WordPress QUANDO nosso app JS carregar */
+body.zazo-app-loaded #wpadminbar,
+body.zazo-app-loaded #adminmenumain,
+body.zazo-app-loaded #wpfooter,
+body.zazo-app-loaded #screen-meta-links,
+body.zazo-app-loaded #screen-meta {
+    display: none !important;
+}
+/* Ajustes para o conteúdo principal assumir o espaço total */
+body.zazo-app-loaded #wpcontent {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+html.wp-toolbar {
+    padding-top: 0 !important;
+}
+
+/* 3. Estrutura Principal da Nova Interface */
+.zazo-admin-shell { display: flex; height: 100vh; font-family: var(--font-family); }
+.zazo-sidebar {
+    width: 220px;
+    background: var(--c-bg-sidebar);
+    padding: 1rem 0.75rem;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+.zazo-main-content {
+    flex-grow: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--c-bg-page);
+}
+.zazo-topbar {
+    height: 65px;
+    background: var(--c-bg-card);
+    border-bottom: 1px solid var(--c-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    flex-shrink: 0;
+}
+#zazo-content-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+#zazo-content-area #wpbody-content {
+    display: block !important;
+}
+
+/* 4. Componentes da Interface */
+/* Topbar */
+.zazo-topbar-left .topbar-title { font-size: 1.25rem; font-weight: 600; color: var(--c-text-header); }
+.zazo-topbar-right { display: flex; align-items: center; gap: 1.5rem; }
+.zazo-topbar-right .topbar-button { background: var(--c-bg-button-primary); color: white !important; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 500; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+.zazo-topbar-right .topbar-button:hover { background: var(--c-bg-button-primary-hover); }
+.zazo-topbar-right .user-profile-link { display: flex; align-items: center; gap: 0.75rem; color: var(--c-text-body); font-weight: 500; text-decoration: none; }
+.zazo-topbar-right .user-profile-link .avatar { width: 32px; height: 32px; border-radius: 50%; }
+
+/* Sidebar */
+.zazo-sidebar-menu { list-style: none; padding: 0; margin: 0; }
+.zazo-menu-item a { display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: 6px; color: var(--c-text-sidebar); font-weight: 500; text-decoration: none; margin-bottom: 0.25rem; transition: all 0.2s ease; }
+.zazo-menu-item .icon { margin-right: 0.8rem; font-size: 1.4rem; }
+.zazo-menu-item a:hover { color: var(--c-bg-button-primary); background: #D6E2EF; }
+.zazo-menu-item.active > a { color: var(--c-text-sidebar-active); background: var(--c-bg-button-primary); }
+.zazo-menu-item.active .icon, .zazo-menu-item.active .update-count { color: var(--c-text-sidebar-active) !important; }
+.zazo-menu-item .update-count { margin-left: auto; background: #E53E3E; color: white; font-size: 0.7rem; font-weight: 600; border-radius: 6px; padding: 2px 6px; }
+
+/*
+ * 5. Estilização dos Widgets Padrão do WordPress (Cards)
+ */
+.postbox {
+    background: var(--c-bg-card);
+    border: none;
+    border-radius: 8px;
+    box-shadow: var(--c-shadow);
+    margin-bottom: 2rem !important;
+}
+
+/* Estiliza o cabeçalho (título) do card */
+.postbox .postbox-header,
+.postbox .hndle {
+    background: var(--c-bg-card);
+    /* ALTERAÇÃO 3: Linha da borda removida */
+    border-bottom: none;
+    font-weight: 600;
+    font-size: 1.1rem !important;
+    color: var(--c-text-header);
+    padding: 1rem 2rem 0.5rem 0.4rem;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Estiliza a área de conteúdo interna do card */
+.postbox .inside {
+    /* ALTERAÇÃO 2: Padding aumentado para dar mais respiro */
+    padding: 0.5rem 2rem 2rem 2rem;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--c-text-body);
+}
+
+/* Ajusta links dentro dos cards */
+.postbox .inside a {
+    color: var(--c-text-link);
+    text-decoration: none;
+    font-weight: 500;
+}
+.postbox .inside a:hover {
+    text-decoration: underline;
+}
+
+/* Ajusta o botão de "Salvar como rascunho" para o novo design */
+#dashboard_quick_press .button-primary {
+    background: var(--c-bg-button-primary) !important;
+    border-color: var(--c-bg-button-primary) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    height: auto;
+}
+#dashboard_quick_press .button-primary:hover {
+    background: var(--c-bg-button-primary-hover) !important;
+}
+
+/* Ajustes no conteudo dos cards */
+.postbox-header {
+    border-bottom: 1px solid var(--c-border) !important;
+    margin-bottom: 1rem !important;
+}
+p.submit {
+    padding-bottom: 1rem !important;
+}
+
+/*
+ * 6. Estilos para os Novos Widgets do Dashboard
+ */
+
+/* Widget Highlights */
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.highlight-item .icon {
+    font-size: 2.5rem;
+    color: var(--c-primary);
+}
+.highlight-item .info .value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--c-text-header);
+}
+.highlight-item .info .label {
+    font-size: 0.9rem;
+    color: var(--c-text-body);
+}
+
+/* Widget Teams */
+.teams-table-wrapper {
+    overflow-x: auto;
+}
+.teams-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.teams-table th, .teams-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--c-border);
+}
+.teams-table th {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--c-text-muted);
+}
+.teams-table .team-info .name {
+    font-weight: 600;
+    color: var(--c-text-header);
+}
+.teams-table .team-info .role {
+    font-size: 0.85rem;
+    color: var(--c-text-muted);
+}
+.teams-table .rating .dashicons-star-filled {
+    color: #FBBF24; /* Amarelo */
+}
+.teams-table .members-list {
+    display: flex;
+}
+.teams-table .members-list .member-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--c-bg-card);
+    margin-left: -8px;
+}
+.teams-table .members-list .member-avatar:first-child {
+    margin-left: 0;
+}
