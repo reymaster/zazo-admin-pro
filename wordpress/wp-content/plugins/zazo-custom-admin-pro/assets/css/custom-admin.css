@@ -1,0 +1,39 @@
+/* Oculta a UI padrão do WordPress */
+#wpadminbar, #adminmenumain, #wpfooter, #update-nag,.update-nag {
+    display: none!important;
+}
+
+/* Remove o preenchimento superior deixado pela barra de administração */
+html.wp-toolbar {
+    padding-top: 0!important;
+}
+
+/* Ajusta o contêiner de conteúdo principal do WordPress */
+#wpcontent {
+    padding-left: 0;
+    margin-left: 0;
+}
+#wpbody-content {
+    padding-bottom: 0;
+}
+
+/* Oculta o título do widget do painel principal */
+#custom_admin_pro_main.hndle {
+    display: none;
+}
+
+/* Remove a borda e o fundo do contêiner do widget */
+#custom_admin_pro_main.inside {
+    margin: 0;
+    padding: 0;
+}
+#custom_admin_pro_main {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+/* Garante que o corpo da página ocupe toda a altura */
+#wpbody {
+    height: 100vh;
+}

@@ -1,0 +1,25 @@
+body.login {
+    background: #F1F1F1!important;
+}
+#login h1 a {
+    background-image: url('../media/logos/default-dark.svg'); /* Você precisará adicionar este logo */
+    background-size: 200px;
+    width: 200px;
+    height: 40px;
+}
+.login form {
+    margin-top: 20px;
+    margin-left: 0;
+    padding: 26px 24px 46px;
+    font-weight: 400;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.13);
+}
+.login.button-primary {
+    background: #0095ee;
+    border-color: #0073aa #006799 #006799;
+    box-shadow: 0 1px 0 #006799;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+}
